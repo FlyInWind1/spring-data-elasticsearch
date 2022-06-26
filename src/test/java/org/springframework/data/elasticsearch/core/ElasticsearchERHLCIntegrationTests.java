@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.data.elasticsearch.core;
+package org.springframework.data.elasticsearch.client.erhlc;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -45,14 +45,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.elasticsearch.EnabledIfElasticsearch;
+import org.springframework.data.elasticsearch.core.ElasticsearchIntegrationTests;
+import org.springframework.data.elasticsearch.core.RefreshPolicy;
+import org.springframework.data.elasticsearch.core.ScriptType;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.BaseQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.FetchSourceFilterBuilder;
 import org.springframework.data.elasticsearch.core.query.IndicesOptions;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.data.elasticsearch.core.query.RescorerQuery;
-import org.springframework.data.elasticsearch.core.query.ScriptField;
 import org.springframework.data.elasticsearch.core.query.UpdateQuery;
 import org.springframework.data.elasticsearch.junit.jupiter.ElasticsearchRestTemplateConfiguration;
 import org.springframework.data.elasticsearch.utils.IndexNameProvider;
@@ -73,7 +75,9 @@ import org.springframework.test.context.ContextConfiguration;
  * @author Don Wellington
  * @author Peter-Josef Meisch
  * @author Farid Faoudi
+ * @author Andriy Redko
  */
+@EnabledIfElasticsearch
 @ContextConfiguration(classes = { ElasticsearchERHLCIntegrationTests.Config.class })
 @DisplayName("Using Elasticsearch RestHighLevelClient")
 public class ElasticsearchERHLCIntegrationTests extends ElasticsearchIntegrationTests {
@@ -288,5 +292,9 @@ public class ElasticsearchERHLCIntegrationTests extends ElasticsearchIntegration
 		assertThat(request.getScript().getIdOrCode()).isEqualTo("script");
 		assertThat(request.getScript().getType()).isEqualTo(org.elasticsearch.script.ScriptType.INLINE);
 		assertThat(request.getScript().getLang()).isEqualTo("painless");
+	}
+
+	private RequestFactory getRequestFactory() {
+		return ((ElasticsearchRestTemplate) operations).getRequestFactory();
 	}
 }

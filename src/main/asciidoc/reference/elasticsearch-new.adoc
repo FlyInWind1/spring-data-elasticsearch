@@ -1,11 +1,19 @@
 [[new-features]]
 = What's new
 
+[[new-features.5-0-0]]
+== New in Spring Data Elasticsearch 5.0
+
+* Upgrade to Java 17 baseline
+* Upgrade to Spring Framework 6
+* Use the new Elasticsearch client library
+* Opensearch 1.x / 2.x support
+
 [[new-features.4-4-0]]
 == New in Spring Data Elasticsearch 4.4
 
 * Introduction of new imperative and reactive clients using the classes from the new Elasticsearch Java client
-* Upgrade to Elasticsearch 7.17.4.
+* Upgrade to Elasticsearch 7.17.3.
 
 [[new-features.4-3-0]]
 == New in Spring Data Elasticsearch 4.3

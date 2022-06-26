@@ -30,6 +30,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.elasticsearch.ELCQueries;
+import org.springframework.data.elasticsearch.EnabledIfElasticsearch;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 import org.springframework.data.elasticsearch.client.elc.NativeQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.BaseQueryBuilder;
@@ -45,8 +46,10 @@ import org.springframework.test.context.ContextConfiguration;
 
 /**
  * @author Farid Faoudi
+ * @author Andriy Redko
  * @since 4.4
  */
+@EnabledIfElasticsearch
 @ContextConfiguration(classes = { ElasticsearchELCIntegrationTests.Config.class })
 @DisplayName("Using Elasticsearch Client")
 public class ElasticsearchELCIntegrationTests extends ElasticsearchIntegrationTests {
